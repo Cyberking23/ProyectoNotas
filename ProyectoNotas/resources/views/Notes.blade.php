@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-100 p-6 ">
     <div class="max-w-6xl mx-auto ">
@@ -34,35 +34,12 @@
                     <button>🗑️</button>
                 </div>
             </div>
-            <div class="bg-white p-4 rounded-lg shadow">
-                <div class="flex justify-between items-start">
-                    <h2 class="font-semibold">Test Note 111</h2>
-                    <span>📌</span>
-                </div>
-                <p class="text-gray-500 text-sm">6th Apr 2024</p>
-                <p class="text-gray-700 mt-2">Test Note 111</p>
-                <p class="text-blue-500 text-sm mt-2">#111</p>
-                <div class="flex justify-end space-x-2 mt-3">
-                    <button>✏️</button>
-                    <button>🗑️</button>
-                </div>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
-                <div class="flex justify-between items-start">
-                    <h2 class="font-semibold">Prepare for Interview</h2>
-                    <span>📌</span>
-                </div>
-                <p class="text-gray-500 text-sm">6th Apr 2024</p>
-                <p class="text-gray-700 mt-2">Tomorrow I have an important interview...</p>
-                <p class="text-blue-500 text-sm mt-2">#Interview #Preparation</p>
-                <div class="flex justify-end space-x-2 mt-3">
-                    <button>✏️</button>
-                    <button>🗑️</button>
-                </div>
-            </div>
         </div>
 
-        <button class="fixed bottom-6 right-6 bg-blue-500 text-white rounded-full w-12 h-12 text-2xl flex items-center justify-center shadow-lg">+</button>
+        <a href="{{ route('notes.form') }}"><button class="fixed bottom-6 right-6 bg-blue-500 text-white rounded-full w-12 h-12 text-2xl flex items-center justify-center shadow-lg">+</button></a>
+
+
     </div>
 </body>
+    
 </html>

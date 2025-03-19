@@ -18,9 +18,10 @@ Route::get('/', function () {
 });
 
 
-
-
-
 Route::get('/notes', function () {
     return view('Notes');
-});
+})->name('notes.index');
+
+Route::get('/formnotes', function () {
+    return view('NotesForm');
+})->name('notes.form');
