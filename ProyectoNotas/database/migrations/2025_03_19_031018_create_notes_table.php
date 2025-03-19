@@ -14,6 +14,7 @@ return new class extends Migration
             $table->text('content'); 
             $table->date('date'); 
             $table->string('tags')->nullable(); 
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
             $table->timestamps();
         });
     }

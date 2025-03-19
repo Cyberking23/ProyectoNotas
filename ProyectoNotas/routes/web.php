@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get('/notes', function () {
     return view('Notes');
 })->name('notes.index');
@@ -25,3 +25,7 @@ Route::get('/notes', function () {
 Route::get('/formnotes', function () {
     return view('NotesForm');
 })->name('notes.form');
+
+
+
+

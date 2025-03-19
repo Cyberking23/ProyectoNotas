@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Note;
 
 class NoteController extends Controller
 {
@@ -17,8 +18,15 @@ class NoteController extends Controller
             'date' => 'required|date',
             'tags' => 'nullable|string'
         ]);
-
-        $note = Note::create($request->all());
+    
+        $note = Note::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'date' => $request->date,
+            'tags' => $request->tags,
+            'user_id' => 1
+        ]);
+    
         return response()->json($note, 201);
     }
 
@@ -26,17 +34,27 @@ class NoteController extends Controller
         return response()->json($note, 200);
     }
 
-    public function update(Request $request, Note $note) {
-        $request->validate([
+    public function update(Request $request, $id) {
+        $note = Note::find($id);
+        if (!$note) {
+            return response()->json(['message' => 'Note not found'], 404);
+        }
+    
+        $validatedData = $request->validate([
             'title' => 'sometimes|string|max:255',
             'content' => 'sometimes|string',
             'date' => 'sometimes|date',
             'tags' => 'nullable|string'
         ]);
-
-        $note->update($request->all());
-        return response()->json($note, 200);
+    
+        if (!empty($validatedData)) {
+            $note->fill($validatedData);
+            $note->save();
+        }
+    
+        return response()->json($note);
     }
+    
 
     public function destroy(Note $note) {
         $note->delete();

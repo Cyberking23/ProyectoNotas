@@ -10,6 +10,7 @@
     <div class="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 class="text-xl font-semibold mb-4">Register a New Notes</h2>
         <form>
+           
             <div class="">
                 <div class="mb-4">
                     <label class="block text-gray-700">Title</label>

@@ -54,7 +54,6 @@ class AuthController extends Controller
             return response()->json(['message' => 'El campo password es obligatorio.'], 400);
         }
 
-        // Intentar autenticar al usuario con las credenciales proporcionadas
         $credentials = $request->only('email', 'password');
 
         if (!$token = JWTAuth::attempt($credentials)) {
@@ -66,8 +65,6 @@ class AuthController extends Controller
             'token' => $token
         ]);
     }
-
-
 
     public function logout()
     {
