@@ -73,3 +73,52 @@ class AuthController extends Controller
         return response()->json(['message' => 'Sesión cerrada correctamente']);
     }
 }
+
+
+/* PARTE CESAR
+public function register(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8',
+    ]);
+
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
+
+    return response()->json([
+        'user' => $user,
+        'message' => 'Usuario registrado exitosamente'
+    ], 201);
+}
+
+public function login(Request $request)
+{
+    $credentials = $request->only('email', 'password');
+
+    try {
+        if (!$token = JWTAuth::attempt($credentials)) {
+            return response()->json(['error' => 'Credenciales incorrectas'], 401);
+        }
+    } catch (JWTException $e) {
+        return response()->json(['error' => 'No se pudo crear el token'], 500);
+    }
+
+    return response()->json([
+        'message' => 'Usuario logueado con éxito',
+        'token' => $token
+    ]);
+}
+
+public function logout()
+{
+    JWTAuth::invalidate(JWTAuth::getToken());
+
+    return response()->json(['message' => 'Sesión cerrada correctamente']);
+}
+}
+*/
