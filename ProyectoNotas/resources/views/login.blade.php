@@ -1,71 +1,31 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login & Registro</title>
+    <title>Login</title>
     @vite('resources/css/app.css')
 </head>
-<body class="h-screen flex items-center justify-center bg-white">
-    <div class="flex flex-col md:flex-row-reverse bg-white shadow-2xl rounded-2xl overflow-hidden w-full max-w-3xl transform transition duration-500 hover:scale-105 border border-gray-300">
-        
-        <div class="w-full md:w-1/2 hidden md:block bg-gray-100">
-            <img class="w-full h-full object-cover" src="{{ asset('img/Escrito.jpeg') }}" alt="Imagen representativa de notas">
-        </div>
-
-        <div class="w-full md:w-1/2 p-10 space-y-6">
-            <h2 id="form-title" class="text-3xl font-extrabold text-center text-gray-800">Iniciar Sesión</h2>
-
-            <!-- Mensajes de error -->
-            <div id="error-message" class="text-red-600 text-center hidden"></div>
-
-            <!-- Formulario de Login -->
-            <form id="login-form" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700">Correo electrónico</label>
-                    <input type="email" id="email" name="email" class="w-full px-4 py-3 mt-1 border rounded-lg focus:ring focus:ring-blue-300 focus:outline-none shadow-md" placeholder="correo@gmail.com" required>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700">Contraseña</label>
-                    <div class="relative">
-                        <input id="password" type="password" name="password" class="w-full px-4 py-3 mt-1 border rounded-lg focus:ring focus:ring-blue-300 focus:outline-none shadow-md pr-10" placeholder="••••••••" required>
-                    </div>
-                </div>
-                <button type="submit" class="w-full px-4 py-3 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 shadow-lg transform transition duration-300 hover:scale-105">Ingresar</button>
-            </form>
-        </div>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-96">
+        <h1 class="text-2xl font-bold mb-6">Iniciar Sesión</h1>
+        <form id="loginForm">
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                <input type="email" id="email" name="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div class="mb-6">
+                <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                <input type="password" id="password" name="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                Iniciar Sesión
+            </button>
+        </form>
+        <p class="mt-4 text-center">
+            ¿No tienes una cuenta? <a href="/register" class="text-indigo-600 hover:underline">Regístrate</a>
+        </p>
     </div>
 
-    @vite('resources/js/app.js')
-
-    <script>
-    document.getElementById('login-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        let email = document.getElementById('email').value;
-        let password = document.getElementById('password').value;
-        let errorMessage = document.getElementById('error-message');
-
-        fetch("{{ route('login.post') }}", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email: email, password: password })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.token) {
-                localStorage.setItem("jwt_token", data.token);
-                alert("Inicio de sesión exitoso");
-                window.location.href = "/dashboard";
-            } else {
-                errorMessage.textContent = data.error || "Credenciales incorrectas";
-                errorMessage.classList.remove('hidden');
-            }
-        })
-        .catch(error => console.error("Error:", error));
-    });
-    </script>
 </body>
 </html>

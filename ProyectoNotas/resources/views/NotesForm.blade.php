@@ -32,7 +32,6 @@
             </div>
         </form>
         <a href="{{route('notes.index')}}"><button type="submit" class="w-[50%] bg-red-500 hover:bg-red-800 text-white p-2 rounded-lg mb-5">Regresar</button></a>
-
     </div>
 </body>
 </html>
