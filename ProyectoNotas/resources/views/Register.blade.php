@@ -59,7 +59,7 @@
         </form>
         
         <p class="mt-4 text-center">
-            ¿Ya tienes una cuenta? <a href="/login" class="text-indigo-600 hover:underline">Inicia Sesión</a>
+            ¿Ya tienes una cuenta? <a href="/" class="text-indigo-600 hover:underline">Inicia Sesión</a>
         </p>
     </div>
 </body>

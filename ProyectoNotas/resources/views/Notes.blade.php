@@ -18,7 +18,7 @@
             <h1 class="text-2xl font-bold">Notes</h1>
             
             <div class="flex items-center space-x-4">
-                <a href="#" class="text-blue-500">Logout</a>
+                <a href="#" class="text-blue-500">Salir</a>
             </div>
         </div>
 
