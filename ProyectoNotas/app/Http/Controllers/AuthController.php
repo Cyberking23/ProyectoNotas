@@ -17,7 +17,7 @@ class AuthController extends Controller
             'LastName' => 'required|string|max:255',
             'PhoneNumber' => 'required|string|max:15',
             'Email' => 'required|string|email|max:255|unique:users',
-            'Password' => 'required|string|min:8|confirmed',
+            'Password' => 'required|string|min:8',
         ]);
 
         $user = User::create([
@@ -28,11 +28,10 @@ class AuthController extends Controller
             'Password' => Hash::make($request->input('Password')),
         ]);
 
-        return response()->json([
-            'user' => $user,
-            'message' => 'Usuario registrado exitosamente'
-        ], 201);
+        return redirect()->back()->with('success', 'Usuario registrado exitosamente');
     }
+
+    
 
     public function login(Request $request)
     {

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('FirtsName');
+            $table->string('FirstName');
             $table->string('LastName');
             $table->string('PhoneNumber');
             $table->string('Email')->unique();
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */
