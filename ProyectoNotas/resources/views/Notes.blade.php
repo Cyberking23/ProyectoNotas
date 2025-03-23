@@ -16,12 +16,8 @@
         <!-- Barra superior -->
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold">Notes</h1>
-            <div class="relative">
-                <input type="text" placeholder="Search Notes" class="border rounded-lg p-2 pl-10 w-80">
-                <span class="absolute left-3 top-3 text-gray-400">🔍</span>
-            </div>
+            
             <div class="flex items-center space-x-4">
-                <div class="bg-gray-300 h-10 w-10 flex items-center justify-center rounded-full">TU</div>
                 <a href="#" class="text-blue-500">Logout</a>
             </div>
         </div>
