@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -13,55 +12,49 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'FirstName' => 'required|string|max:255',
-            'LastName' => 'required|string|max:255',
-            'PhoneNumber' => 'required|string|max:15',
-            'Email' => 'required|string|email|max:255|unique:users',
-            'Password' => 'required|string|min:8',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:15',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
         ]);
 
         $user = User::create([
-            'FirstName' => $request->input('FirstName'),
-            'LastName' => $request->input('LastName'),
-            'PhoneNumber' => $request->input('PhoneNumber'),
-            'Email' => $request->input('Email'),
-            'Password' => Hash::make($request->input('Password')),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'phone_number' => $request->input('phone_number'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
         ]);
 
         return redirect()->back()->with('success', 'Usuario registrado exitosamente');
     }
 
     
-
     public function login(Request $request)
     {
         $request->validate([
-            'Email' => 'required|email',
-            'Password' => 'required|string|min:8'
+            'email' => 'required|email',
+            'password' => 'required|string|min:8'
         ]);
-
-        $credentials = [
-            'Email' => $request->Email,
-            'password' => $request->Password,
-        ];
-
-        if (!$token = JWTAuth::attempt($credentials)) {
-            return response()->json(['error' => 'Credenciales incorrectas'], 401);
+    
+        $user = User::where('email', $request->email)->first();
+    
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return redirect()->route('login')->with('error', 'Credenciales incorrectas');
         }
-
-        $user = auth()->user();
-
-        return response()->json([
-            'message' => 'Usuario autenticado con éxito',
-            'token' => $token,
-            'user' => $user
-        ], 200);
+    
+        Auth::login($user);
+        session(['user' => $user]);
+    
+        return redirect()->route('notes.index')->with('success', 'Inicio de sesión exitoso');
     }
 
     public function logout()
     {
-        JWTAuth::invalidate(JWTAuth::getToken());
+        Auth::logout();
+        session()->flush();
 
-        return response()->json(['message' => 'Sesión cerrada correctamente']);
+        return redirect()->route('login')->with('success', 'Sesión cerrada correctamente');
     }
 }

@@ -6,8 +6,14 @@
     <title>Notes Dashboard</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100 p-6 ">
-    <div class="max-w-6xl mx-auto ">
+<body class="bg-gray-100 p-6">
+    <div class="max-w-6xl mx-auto">
+        <!-- Mensaje de bienvenida -->
+        <div class="bg-blue-100 text-blue-700 p-4 rounded-lg mb-6">
+            <p class="text-lg font-semibold">¡Bienvenido, {{ Auth::user()->first_name }}!</p>
+        </div>
+
+        <!-- Barra superior -->
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold">Notes</h1>
             <div class="relative">
@@ -20,6 +26,7 @@
             </div>
         </div>
 
+        <!-- Lista de Notas -->
         <div class="grid grid-cols-3 gap-4">
             <div class="bg-white p-4 rounded-lg shadow">
                 <div class="flex justify-between items-start">
@@ -36,10 +43,10 @@
             </div>
         </div>
 
-        <a href="{{ route('notes.form') }}"><button class="fixed bottom-6 right-6 bg-blue-500 text-white rounded-full w-12 h-12 text-2xl flex items-center justify-center shadow-lg">+</button></a>
-
-
+        <!-- Botón flotante para agregar notas -->
+        <a href="{{ route('notes.form') }}">
+            <button class="fixed bottom-6 right-6 bg-blue-500 text-white rounded-full w-12 h-12 text-2xl flex items-center justify-center shadow-lg">+</button>
+        </a>
     </div>
 </body>
-    
 </html>
