@@ -28,4 +28,16 @@ Route::get('/formnotes', function () {
 
 
 
+/* RUTAS PARA LOGIN Y REGISTRO */
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
 
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+/* PROTEGER RUTA DE DASHBOARD (Solo para usuarios autenticados) */
+Route::get('/dashboard', function () {
+    return "Bienvenido al dashboard";
+})->middleware('auth')->name('dashboard'); 
