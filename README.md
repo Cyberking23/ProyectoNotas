@@ -46,8 +46,8 @@ La aplicación es desarrollada utilizando tecnologías modernas del entorno web:
 ##  Enlaces del proyecto
 
 - [Documento PDF de la fase 1](#) *(enlace a subir cuando esté listo)*
-- [Mockups del proyecto (Figma)](#) *(enlace público a Figma)*
-- [Tablero de Trello / Notion](#) *(enlace público al tablero de tareas)*
+- [Mockups del proyecto (Figma)](https://www.figma.com/design/d5OKlXWiKyRSXRv9oJ3eTZ/DSS?node-id=0-1&t=4aXcTIhSAbiWL79o-1)
+- [Tablero de Trello / Notion](https://trello.com/invite/b/67daca092104b127a212b72c/ATTI7b44884d0ee0089c83702fa5df6fbc7d07F0F01A/proyecto-dss)
 - [Diagrama Entidad-Relación](#) *(enlace o imagen si se desea)*
 
 
