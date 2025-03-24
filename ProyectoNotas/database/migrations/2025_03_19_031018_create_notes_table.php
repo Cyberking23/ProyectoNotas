@@ -7,14 +7,19 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
 
-    public function up() {
+    public function up()
+    {
         Schema::create('notes', function (Blueprint $table) {
-            $table->id(); 
-            $table->string('title'); 
-            $table->text('content'); 
-            $table->date('date'); 
-            $table->string('tags')->nullable(); 
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
+            $table->id();
+            $table->string('title');
+            $table->text('content');
+            $table->boolean("is_important");
+            $table->string("tipo");
+            $table->foreignId("id_category")
+                ->nullable()
+                ->constrained("category")
+                ->onDelete("cascade");
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
