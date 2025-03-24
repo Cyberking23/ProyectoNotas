@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('reminder', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->dateTime('fecha_recordatorio');
+            $table->boolean('activo');
             $table->foreignId("id_note")->constrained("notes")->onDelete("cascade");
             $table->timestamps();
         });
