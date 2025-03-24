@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes Dashboard</title>
-    @vite('resources/css/app.css')
-</head>
-<body class="bg-gray-100 p-6">
+@extends('layouts.dashboard')
+@section('content')
     <div class="max-w-6xl mx-auto">
         <!-- Mensaje de bienvenida -->
         <div class="bg-blue-100 text-blue-700 p-4 rounded-lg mb-6">
@@ -16,7 +9,7 @@
         <!-- Barra superior -->
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold">Notes</h1>
-            
+
             <div class="flex items-center space-x-4">
                 <a href="#" class="text-blue-500">Salir</a>
             </div>
@@ -41,8 +34,8 @@
 
         <!-- Botón flotante para agregar notas -->
         <a href="{{ route('notes.form') }}">
-            <button class="fixed bottom-6 right-6 bg-blue-500 text-white rounded-full w-12 h-12 text-2xl flex items-center justify-center shadow-lg">+</button>
+            <button
+                class="fixed bottom-6 right-6 bg-blue-500 text-white rounded-full w-12 h-12 text-2xl flex items-center justify-center shadow-lg">+</button>
         </a>
     </div>
-</body>
-</html>
+@endsection
