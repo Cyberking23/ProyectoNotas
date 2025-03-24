@@ -4,60 +4,86 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Note;
+use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
-    public function index() {
-        return response()->json(Note::all(), 200);
+    public function index()
+    {
+        $notes = Note::with(relations: 'category')->get();
+        return view('notes', compact('notes'));
     }
 
-    public function store(Request $request) {
-        $request->validate([
+    public function importantNotes()
+    {
+        $notes = Note::query()->where('is_important', '1')->with('category')->get();
+        return view('notes', compact('notes'));
+    }
+
+
+    public function createNotes(Request $request)
+    {
+
+        $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'date' => 'required|date',
-            'tags' => 'nullable|string'
+            // 'is_important' => 'required|boolean',
+            'tipo' => 'required|string|max:50',
+            'id_category' => 'nullable|exists:category,id',
         ]);
-    
-        $note = Note::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'date' => $request->date,
-            'tags' => $request->tags,
-            'user_id' => 1
+
+        Note::create([
+            ...$validatedData,
+            "is_important" => !!$request->is_important,
+            "user_id" => Auth::user()->getAuthIdentifier()
         ]);
-    
-        return response()->json($note, 201);
+
+        return redirect("/notes")->with('success', 'Nota creada correctamente.');
     }
 
-    public function show(Note $note) {
-        return response()->json($note, 200);
+    public function show(Request $request, $id)
+    {
+        $note = Note::find($id)->with('category')->first();
+        return view('notesform', compact('note'));
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request)
+    {
+        $note = Note::find($request->id);
+        if (!$note) {
+            return response()->json(['message' => 'Note not found'], 404);
+        }
+
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'tipo' => 'required|string|max:50',
+            'id_category' => 'nullable|exists:category,id',
+        ]);
+
+        if (!empty($validatedData)) {
+            $note->fill([
+                ...$validatedData,
+                "is_important" => !!$request->is_important,
+                "user_id" => Auth::user()->getAuthIdentifier()
+            ]);
+            $note->save();
+        }
+
+        return redirect("/notes")->with('success', 'Nota ha sido editada correctamente');
+    }
+
+
+    public function destroy(Request $request, $id)
+    {
+
         $note = Note::find($id);
         if (!$note) {
             return response()->json(['message' => 'Note not found'], 404);
         }
-    
-        $validatedData = $request->validate([
-            'title' => 'sometimes|string|max:255',
-            'content' => 'sometimes|string',
-            'date' => 'sometimes|date',
-            'tags' => 'nullable|string'
-        ]);
-    
-        if (!empty($validatedData)) {
-            $note->fill($validatedData);
-            $note->save();
-        }
-    
-        return response()->json($note);
-    }
-    
 
-    public function destroy(Note $note) {
         $note->delete();
-        return response()->json(['message' => 'Note deleted successfully'], 200);
+
+        return redirect("/notes")->with('success', 'Nota ha sido eliminada correctamente');
     }
 }

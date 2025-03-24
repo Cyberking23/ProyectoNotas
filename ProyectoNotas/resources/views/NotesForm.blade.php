@@ -1,37 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Note Registration</title>
-    @vite('resources/css/app.css')
-</head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 class="text-xl font-semibold mb-4">Register a New Notes</h2>
-        <form>
-           
-            <div class="">
-                <div class="mb-4">
-                    <label class="block text-gray-700">Title</label>
-                    <input type="text" class="w-full p-2 border rounded-lg" placeholder="Enter title" required>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700">Date</label>
-                    <input type="date" class="w-full p-2 border rounded-lg" required>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700">Content</label>
-                    <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Enter note content" required></textarea>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700">Tags</label>
-                    <input type="text" class="w-full p-2 border rounded-lg" placeholder="#tag1 #tag2">
-                </div>
-                <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg mb-5">Registrar Nota</button>                
+@extends('layouts.dashboard')
+@section('content')
+
+    <form 
+        action="{{ isset($note) ? route('notes.update') : route('notes.create') }}"
+        method="post"
+        class="space-y-5 p-6 bg-white rounded-lg">
+        @csrf
+
+        @if (isset($note))
+            @method('PUT')
+            <input type="" name="id" value="{{$note->id}}" hidden>
+        @endif
+
+        @if ($errors->any())
+            <div class="bg-red-500 text-white p-3 rounded-lg shadow-md mb-4">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-        </form>
-        <a href="{{route('notes.index')}}"><button type="submit" class="w-[50%] bg-red-500 hover:bg-red-800 text-white p-2 rounded-lg mb-5">Regresar</button></a>
-    </div>
-</body>
-</html>
+        @endif
+        <!-- Título -->
+        <h1 class="font-bold text-xl text-indigo-600">
+            @if (isset($note))
+                Editar Nota
+            @else
+                Crear Notas
+            @endif
+        </h1>
+        <div class="space-y-2">
+            <label class="block text-sm font-medium text-indigo-600">Título</label>
+            <input type="text" name="title" value="{{ old('title', $note->title ?? '') }}"
+                class="w-full px-4 py-2.5 border border-indigo-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="Escribe un título">
+        </div>
+
+        <!-- Contenido -->
+        <div class="space-y-2">
+            <label class="block text-sm font-medium text-indigo-600">Contenido</label>
+            <textarea rows="4" name="content"
+                class="w-full px-4 py-2.5 border border-indigo-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="Escribe tu nota...">{{ old('content', $note->content ?? '') }}</textarea>
+        </div>
+
+        <!-- Fecha y Categoría -->
+        <div class="grid gap-4 md:grid-cols-2">
+            <!-- Fecha -->
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-indigo-600">Tipo</label>
+                <input value="{{ old('tipo', $note->tipo ?? '') }}" name="tipo" placeholder="Tipo de la nota"
+                    class="w-full px-4 py-2.5 border border-indigo-200 rounded-lg focus:ring-2 focus:ring-indigo-500">
+            </div>
+
+            <!-- Categoría -->
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-indigo-600">Categoría</label>
+                <select name="id_category"
+                    class="w-full px-4 py-2.5 border border-indigo-200 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                    <option value="">Sin Categoria</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="flex items-center mt-4 space-x-3">
+            <input 
+            {{ old('is_important', $note->is_important ?? '') ? 'checked' : '' }} type="checkbox" id="important"
+                value="1" name="is_important"
+                class="w-4 h-4 text-indigo-600 border-indigo-300 rounded focus:ring-indigo-500">
+            <label for="important" class="text-sm font-medium text-indigo-600">
+                ¿Es importante?
+            </label>
+        </div>
+
+        <!-- Botón -->
+        <button type="submit"
+            class="w-full py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+            @if (isset($note))
+                Editar Nota
+            @else
+                Crear Nota
+            @endif
+        </button>
+    </form>
+@endsection
