@@ -12,7 +12,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('categoria', compact('categories'));
     }
 
     /**
@@ -20,7 +21,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categoriaform');
     }
 
     /**
@@ -28,15 +29,23 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:category,name',
+        ]);
+
+        // Create the category
+        Category::create($validated);
+
+        return redirect("/category")->with('success', 'Categoria creada correctamente.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Category $category, $id)
     {
-        //
+        $category = Category::find($id)->first();
+        return view('categoriaform', compact('category'));
     }
 
     /**
@@ -52,14 +61,35 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        // Validate the input
+        $category = Category::find($request->id);
+        if (!$category) {
+            return response()->json(['message' => 'Category not found'], 404);
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:category,name',
+        ]);
+
+        // Update the category
+        $category->update($validated);
+
+        return redirect("/category")->with('success', 'Categoria ha sido actualizada correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Request $request, $id)
     {
-        //
+
+        $category = Category::find($id);
+        if (!$category) {
+            return response()->json(['message' => 'Category not found'], 404);
+        }
+
+        $category->delete();
+
+        return redirect("/category")->with('success', 'Categoria ha sido eliminada correctamente');
     }
 }

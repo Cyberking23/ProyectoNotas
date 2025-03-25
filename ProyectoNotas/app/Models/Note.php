@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Note extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'content', 'tipo', 'is_important', 'user_id'];
+    protected $fillable = ['title', 'content', 'tipo', 'is_important', 'user_id', 'id_category'];
 
       // Define the relationship to Category
       public function category()

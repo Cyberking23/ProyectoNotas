@@ -31,13 +31,13 @@
                     Todas las Notas
                 </a>
 
-                <a href="/notes/importante"
+                <a href="#"
                     class="flex items-center gap-3 p-3 rounded-xl text-zinc-600 hover:bg-zinc-50">
                     <i class='bx bx-star text-xl'></i>
-                    Notas Importantes
+                    Recordatorios
                 </a>
                 
-                <a href="#" class="flex items-center gap-3 p-3 rounded-xl text-zinc-600 hover:bg-zinc-50">
+                <a href="/category" class="flex items-center gap-3 p-3 rounded-xl text-zinc-600 hover:bg-zinc-50">
                     <i class='bx bx-category text-xl'></i>
                     Categorias
                 </a>

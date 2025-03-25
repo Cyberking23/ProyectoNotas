@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NoteController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('guest')->group(function () {
-    Route::get("/", function(){
-        return redirect("/login"); 
+    Route::get("/", function () {
+        return redirect("/login");
     });
     Route::get('/login', function () {
         return view('login');
@@ -34,10 +36,10 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/notes', [NoteController::class, 'index'])->name(name: 'notes.index');
-    Route::get("/notes/importante", [NoteController::class, 'importantNotes'])->name('notes.importante');
 
     Route::get('/formnotes', function () {
-        return view('NotesForm');
+        $categories = Category::all();
+        return view('NotesForm', compact('categories'));
     })->name('notes.form');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name("logout");
@@ -45,12 +47,15 @@ Route::middleware('auth')->group(function () {
 
     Route::get("/notes/{id}", [NoteController::class, 'show'])->name("notes.show");
     Route::put("/notes", [NoteController::class, 'update'])->name("notes.update");
-    
+
     Route::delete("/notes/{id}", [NoteController::class, 'destroy'])->name("notes.delete");
 
 
 
-    Route::get('/category');
+    Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('/categoryform', [CategoryController::class, 'create'])->name('category.create');
+    Route::get("/category/{id}", [CategoryController::class, 'show'])->name('category.show');
+    Route::post("/category", [CategoryController::class, 'store'])->name('category.store');
+    Route::put("/category", [CategoryController::class, 'update'])->name('category.update');
+    Route::delete("/category/{id}", [CategoryController::class, 'destroy'])->name('category.destroy');
 });
-
-

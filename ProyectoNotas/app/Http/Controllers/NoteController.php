@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Note;
 use Illuminate\Support\Facades\Auth;
@@ -11,12 +12,6 @@ class NoteController extends Controller
     public function index()
     {
         $notes = Note::with(relations: 'category')->get();
-        return view('notes', compact('notes'));
-    }
-
-    public function importantNotes()
-    {
-        $notes = Note::query()->where('is_important', '1')->with('category')->get();
         return view('notes', compact('notes'));
     }
 
@@ -44,7 +39,8 @@ class NoteController extends Controller
     public function show(Request $request, $id)
     {
         $note = Note::find($id)->with('category')->first();
-        return view('notesform', compact('note'));
+        $categories = Category::all();
+        return view('notesform', compact('note', 'categories'));
     }
 
     public function update(Request $request)
@@ -60,6 +56,7 @@ class NoteController extends Controller
             'tipo' => 'required|string|max:50',
             'id_category' => 'nullable|exists:category,id',
         ]);
+        // dd($validatedData);
 
         if (!empty($validatedData)) {
             $note->fill([

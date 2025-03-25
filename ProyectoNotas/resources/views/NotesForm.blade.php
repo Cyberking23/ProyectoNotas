@@ -56,9 +56,13 @@
             <!-- Categoría -->
             <div class="space-y-2">
                 <label class="block text-sm font-medium text-indigo-600">Categoría</label>
-                <select name="id_category"
+                <select 
+                    name="id_category"
                     class="w-full px-4 py-2.5 border border-indigo-200 rounded-lg focus:ring-2 focus:ring-indigo-500">
                     <option value="">Sin Categoria</option>
+                    @foreach ($categories as $cat)
+                        <option value="{{$cat->id}}">{{$cat->name}}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
