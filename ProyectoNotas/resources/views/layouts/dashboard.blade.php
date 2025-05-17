@@ -34,12 +34,23 @@
                 <a href="{{ route('notes.importante') }}"
                     class="flex items-center gap-3 p-3 rounded-xl text-zinc-600 hover:bg-zinc-50">
                     <i class='bx bx-star text-xl'></i>
-                    Recordatorios
+                    Notas Importantes
+                </a>
+
+                <a href="{{ route('reminders.create') }}"
+                    class="flex items-center gap-3 p-3 rounded-xl text-zinc-600 hover:bg-zinc-50">
+                    <i class='bx bx-time text-xl'></i>
+                    Crear Recordatorio
                 </a>
                 
                 <a href="/category" class="flex items-center gap-3 p-3 rounded-xl text-zinc-600 hover:bg-zinc-50">
                     <i class='bx bx-category text-xl'></i>
                     Categorias
+                </a>
+                <a href="{{ route('reminders.upcoming') }}"
+                    class="flex items-center gap-3 p-3 rounded-xl text-zinc-600 hover:bg-zinc-50">
+                    <i class='bx bx-alarm text-xl'></i>
+                    Ver Recordatorios
                 </a>
 
 

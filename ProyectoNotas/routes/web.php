@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\ReminderController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
@@ -59,4 +60,8 @@ Route::middleware('auth')->group(function () {
     Route::post("/category", [CategoryController::class, 'store'])->name('category.store');
     Route::put("/category", [CategoryController::class, 'update'])->name('category.update');
     Route::delete("/category/{id}", [CategoryController::class, 'destroy'])->name('category.destroy');
+    // Route::get('/reminderform', [ReminderController::class, 'create'])->name('reminders.create');
+    // Route::post('/reminder', [ReminderController::class, 'store'])->name('reminders.store');
+    // Route::get('/reminders', [ReminderController::class, 'upcoming'])->name('reminders.upcoming');
+
 });
