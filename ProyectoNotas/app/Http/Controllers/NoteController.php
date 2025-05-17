@@ -15,6 +15,13 @@ class NoteController extends Controller
         return view('notes', compact('notes'));
     }
 
+     public function importantNotes()
+    {
+        $notes = Note::query()->where('is_important', '1')->with('category')->get();
+        return view('notes', compact('notes'));
+    }
+
+
 
     public function createNotes(Request $request)
     {

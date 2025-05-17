@@ -31,7 +31,7 @@
                     Todas las Notas
                 </a>
 
-                <a href="#"
+                <a href="{{ route('notes.importante') }}"
                     class="flex items-center gap-3 p-3 rounded-xl text-zinc-600 hover:bg-zinc-50">
                     <i class='bx bx-star text-xl'></i>
                     Recordatorios

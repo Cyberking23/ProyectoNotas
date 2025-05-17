@@ -36,6 +36,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/notes', [NoteController::class, 'index'])->name(name: 'notes.index');
+    Route::get("/notes/importante", [NoteController::class, 'importantNotes'])->name('notes.importante');
 
     Route::get('/formnotes', function () {
         $categories = Category::all();
