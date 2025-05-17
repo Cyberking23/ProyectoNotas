@@ -18,7 +18,7 @@
         <a href="/categoryform">
             <div
                 class="w-full py-3 bg-indigo-600 text-white text-center rounded-lg font-medium hover:bg-indigo-700 transition-colors">
-                Crear Recordatorio
+                Crear Categoria
             </div>
         </a>
 
