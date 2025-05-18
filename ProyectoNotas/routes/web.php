@@ -60,8 +60,9 @@ Route::middleware('auth')->group(function () {
     Route::post("/category", [CategoryController::class, 'store'])->name('category.store');
     Route::put("/category", [CategoryController::class, 'update'])->name('category.update');
     Route::delete("/category/{id}", [CategoryController::class, 'destroy'])->name('category.destroy');
-    // Route::get('/reminderform', [ReminderController::class, 'create'])->name('reminders.create');
-    // Route::post('/reminder', [ReminderController::class, 'store'])->name('reminders.store');
-    // Route::get('/reminders', [ReminderController::class, 'upcoming'])->name('reminders.upcoming');
+    Route::get('/reminderform', [ReminderController::class, 'create'])->name('reminders.create');
+    Route::post('/reminder', [ReminderController::class, 'store'])->name('reminders.store');
+    Route::get('/reminders', [ReminderController::class, 'upcoming'])->name('reminders.upcoming');
+    Route::delete('/reminders/{id}', [ReminderController::class, 'destroy'])->name('reminders.destroy');
 
 });

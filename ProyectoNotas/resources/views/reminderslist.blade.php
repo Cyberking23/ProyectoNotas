@@ -12,6 +12,13 @@
                     <i class='bx bx-time text-indigo-400'></i>
                     {{ \Carbon\Carbon::parse($reminder->remind_at)->format('d/m/Y H:i') }}
                 </div>
+                <form action="{{ route('reminders.destroy', $reminder->id) }}" method="POST" class="mt-2">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-sm">
+                        Eliminar
+                    </button>
+                </form>
             </div>
         @empty
             <div class="col-span-full text-center text-zinc-500">

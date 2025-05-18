@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reminder', function (Blueprint $table) {
+        Schema::create('reminders', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->dateTime('fecha_recordatorio');
+            $table->timestamp('remind_at'); // Cambiado de fecha_recordatorio a remind_at
             $table->boolean('activo');
-            $table->foreignId("id_note")->constrained("notes")->onDelete("cascade");
+            $table->foreignId("note_id")->constrained("notes")->onDelete("cascade"); // Cambiado de id_note a note_id
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reminder');
+        Schema::dropIfExists('reminders');
     }
 };
