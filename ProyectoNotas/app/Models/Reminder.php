@@ -16,8 +16,8 @@ class Reminder extends Model
         'activo',
     ];
 
-    public function note()
+   public function note()
     {
-        return $this->belongsTo(Note::class);
+        return $this->belongsTo(\App\Models\Note::class, 'note_id');
     }
 }

@@ -15,4 +15,8 @@ class Note extends Model
       {
           return $this->belongsTo(Category::class, 'id_category');  // Use 'id_category' if it's not the default 'category_id'
       }
+      public function user()
+        {
+            return $this->belongsTo(\App\Models\User::class, 'user_id');
+        }
 }

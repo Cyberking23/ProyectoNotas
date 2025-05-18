@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->timestamp('remind_at'); // Cambiado de fecha_recordatorio a remind_at
             $table->boolean('activo');
+            $table->boolean('sent')->default(false);
             $table->foreignId("note_id")->constrained("notes")->onDelete("cascade"); // Cambiado de id_note a note_id
             $table->timestamps();
         });

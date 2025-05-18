@@ -19,7 +19,7 @@ class ReminderController extends Controller
     {
         $request->validate([
             'note_id' => 'required|exists:notes,id',
-            'remind_at' => 'required|date|after:now',
+            'remind_at' => 'required|date',
         ]);
 
         Reminder::create([
@@ -37,7 +37,6 @@ class ReminderController extends Controller
         $reminders = Reminder::whereHas('note', function($q){
             $q->where('user_id', Auth::id());
         })
-        ->where('remind_at', '>=', now())
         ->orderBy('remind_at')
         ->get();
 
