@@ -12,19 +12,18 @@
             <p class="text-lg font-semibold">¡Bienvenido, {{ Auth::user()->first_name }}!</p>
         </div>
 
-        <!-- Filtro por categoría -->
-        <form method="GET" action="{{ route('notes.index') }}" class="mb-6 flex items-center space-x-3">
-            <label for="category_id" class="text-indigo-700 font-medium">Filtrar por categoría:</label>
-            <select name="category_id" id="category_id" class="border border-indigo-200 rounded px-3 py-2">
-                <option value="">Todas</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
-                        {{ $category->name }}
-                    </option>
-                @endforeach
-            </select>
-            <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Filtrar</button>
-        </form>
+            <form method="GET" action="{{ route('notes.index') }}" class="mb-6 flex items-center space-x-3">
+                <label for="category_id" class="text-indigo-700 font-medium">Filtrar por categoría:</label>
+                <select name="category_id" id="category_id" class="border border-indigo-200 rounded px-3 py-2">
+                    <option value="">Todas</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Filtrar</button>
+            </form>
 
         <div class="flex flex-col gap-4">
             @foreach ($notes as $note)

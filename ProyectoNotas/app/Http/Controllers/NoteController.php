@@ -10,23 +10,24 @@ use Illuminate\Support\Facades\Auth;
 class NoteController extends Controller
 {
    public function index(Request $request)
-{
-    $categories = \App\Models\Category::all();
-    $query = \App\Models\Note::with('category');
+    {
+        $categories = \App\Models\Category::all();
+        $query = \App\Models\Note::with('category');
 
-    if ($request->filled('category_id')) {
-        $query->where('id_category', $request->category_id);
+        if ($request->filled('category_id')) {
+            $query->where('id_category', $request->category_id);
+        }
+
+        $notes = $query->get();
+
+        return view('Notes', compact('notes', 'categories'));
     }
 
-    $notes = $query->get();
-
-    return view('Notes', compact('notes', 'categories'));
-}
-
-     public function importantNotes()
+    public function importantNotes()
     {
-        $notes = Note::query()->where('is_important', '1')->with('category')->get();
-        return view('notes', compact('notes'));
+        $categories = \App\Models\Category::all();
+        $notes = \App\Models\Note::query()->where('is_important', '1')->with('category')->get();
+        return view('notes', compact('notes', 'categories'));
     }
 
 
