@@ -12,11 +12,24 @@
             <p class="text-lg font-semibold">¡Bienvenido, {{ Auth::user()->first_name }}!</p>
         </div>
 
+        <!-- Filtro por categoría -->
+        <form method="GET" action="{{ route('notes.index') }}" class="mb-6 flex items-center space-x-3">
+            <label for="category_id" class="text-indigo-700 font-medium">Filtrar por categoría:</label>
+            <select name="category_id" id="category_id" class="border border-indigo-200 rounded px-3 py-2">
+                <option value="">Todas</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+            <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Filtrar</button>
+        </form>
+
         <div class="flex flex-col gap-4">
             @foreach ($notes as $note)
                 <!-- Card Container -->
-                <div
-                    class="relative bg-white rounded-xl p-6 border border-indigo-100 hover:border-indigo-200 transition-colors">
+                <div class="relative bg-white rounded-xl p-6 border border-indigo-100 hover:border-indigo-200 transition-colors">
                     <!-- Importance Badge -->
                     @if ($note->is_important)
                         <div class="absolute top-4 right-4 flex items-center space-x-1 text-indigo-600">
@@ -69,6 +82,7 @@
                     </div>
                 </div>
 
+                <!-- Modal Eliminar Nota -->
                 <div id="deleteModal{{ $note->id }}"
                     class="hidden fixed inset-0 z-[9999] bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
                     <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
@@ -116,6 +130,5 @@
                 }
             </script>
         </div>
-
     </div>
 @endsection

@@ -9,11 +9,19 @@ use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
-    public function index()
-    {
-        $notes = Note::with(relations: 'category')->get();
-        return view('notes', compact('notes'));
+   public function index(Request $request)
+{
+    $categories = \App\Models\Category::all();
+    $query = \App\Models\Note::with('category');
+
+    if ($request->filled('category_id')) {
+        $query->where('id_category', $request->category_id);
     }
+
+    $notes = $query->get();
+
+    return view('Notes', compact('notes', 'categories'));
+}
 
      public function importantNotes()
     {
