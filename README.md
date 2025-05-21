@@ -17,14 +17,18 @@ La aplicación es desarrollada utilizando tecnologías modernas del entorno web:
 
 ##  Integrantes del equipo
 
-| Estudiante                          | Carné     | Grupo Teórico | Grupo de Laboratorio |
-|------------------------------------|-----------|----------------|-----------------------|
-| Gerardo Rafael Bonilla Saz         | BS242634  | 03T            | 03L                  |
-| Moises Alexander Lara Guevara      | LG220949  | 03T            | 07L                  |
-| Josue Manuel Mejía Avilés          | MA242666  | 03T            | 05L                  |
-| Carlos Eduardo Merino Ventura      | MV242667  | 03T            | 03L                  |
-| Christopher Tommy Núñez Pineda     | NP242671  | 03T            | 07L                  |
-| Cesar Antonio Serrano Gutierrez    | SG242683  | 03T            | 04L                  |
+## Integrantes del equipo
+
+| Estudiante                       | Carné     | Grupo Teórico | Grupo de Laboratorio |
+|----------------------------------|-----------|---------------|----------------------|
+| Gerardo Rafael Bonilla Saz       | BS242634  | 03T           | 03L                  |
+| Moises Alexander Lara Guevara    | LG220949  | 03T           | 07L                  |
+| Josue Manuel Mejía Avilés        | MA242666  | 03T           | 05L                  |
+| Carlos Eduardo Merino Ventura    | MV242667  | 03T           | 03L                  |
+| Christopher Tommy Núñez Pineda   | NP242671  | 03T           | 07L                  |
+| Cesar Antonio Serrano Gutierrez  | SG242683  | 03T           | 04L                  |
+| José Roberto Beltrán Marquez     | BM230401  | 03T           |                      |
+
 
 ---
 
