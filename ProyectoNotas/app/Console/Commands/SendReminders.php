@@ -14,19 +14,31 @@ class SendReminders extends Command
 
     public function handle()
     {
-        $now = Carbon::now();
+        $now = Carbon::now()->timezone('America/El_Salvador');
         $reminders = Reminder::where('sent', false)
-            ->orWhere('remind_at', '<=', $now)
-            ->get();
+            ->where('remind_at', '<=', $now);
+            // ->get();
 
-        foreach ($reminders as $reminder) {
+
+        foreach ($reminders->get() as $reminder) {
             $user = $reminder->note->user;
+
             if ($user && $user->email) {
                 $user->notify(new ReminderNotification($reminder));
-                Log::info("ENVIANDO");
+
+                // Log to Laravel log file
+                Log::info("ENVIANDO recordatorio a {$user->email}");
+
+                // Output to terminal
+                $this->info("✅ ENVIADO a {$user->email}");
+
                 $reminder->sent = true;
                 $reminder->save();
+            } else {
+                Log::warning("Recordatorio no enviado: usuario sin email o inválido para nota {$reminder->note_id}");
+                $this->warn("⚠️ Usuario inválido para el recordatorio con ID {$reminder->id}");
             }
         }
+
     }
 }
