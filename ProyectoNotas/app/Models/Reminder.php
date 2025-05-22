@@ -13,6 +13,7 @@ class Reminder extends Model
         'note_id',
         'remind_at',
         'name',
+        'sent',
         'activo',
     ];
 

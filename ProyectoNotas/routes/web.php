@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/formnotes', function () {
         $categories = Category::all();
-        return view('NotesForm', compact('categories'));
+        return view('notesForm', compact('categories'));
     })->name('notes.form');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name("logout");

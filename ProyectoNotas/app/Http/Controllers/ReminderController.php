@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\ReminderNotification;
 use App\Models\Reminder;
 use App\Models\Note;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,11 +37,12 @@ class ReminderController extends Controller
 
     public function upcoming()
     {
-        $reminders = Reminder::whereHas('note', function($q){
+        $reminders = Reminder::whereHas('note', function ($q) {
             $q->where('user_id', Auth::id());
         })
-        ->orderBy('remind_at')
-        ->get();
+            ->where('sent', false)
+            ->orderBy('remind_at')
+            ->get();
 
         return view('reminderslist', compact('reminders'));
     }

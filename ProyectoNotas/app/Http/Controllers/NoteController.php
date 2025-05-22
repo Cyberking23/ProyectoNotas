@@ -17,16 +17,19 @@ class NoteController extends Controller
         if ($request->filled('category_id')) {
             $query->where('id_category', $request->category_id);
         }
-
+        
+        $query->where('user_id', auth()->id());
         $notes = $query->get();
 
-        return view('Notes', compact('notes', 'categories'));
+        return view('notes', compact('notes', 'categories'));
     }
 
     public function importantNotes()
     {
         $categories = \App\Models\Category::all();
-        $notes = \App\Models\Note::query()->where('is_important', '1')->with('category')->get();
+        $notes = \App\Models\Note::query()
+        ->where('user_id', auth()->id())
+        ->where('is_important', '1')->with('category')->get();
         return view('notes', compact('notes', 'categories'));
     }
 
