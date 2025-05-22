@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reminder extends Model
 {
     use HasFactory;
-
+    protected  $primaryKey = 'id';
     protected $fillable = [
         'note_id',
         'remind_at',

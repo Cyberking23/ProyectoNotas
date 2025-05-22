@@ -47,7 +47,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category, $id)
     {
-        $category = Category::find($id)->first();
+        $category = Category::where('id',$id)->first();
         return view('categoriaform', compact('category'));
     }
 
@@ -65,7 +65,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         // Validate the input
-        $category = Category::find($request->id);
+        $category = Category::where('id',$request->id);
         if (!$category) {
             return response()->json(['message' => 'Category not found'], 404);
         }
@@ -86,7 +86,7 @@ class CategoryController extends Controller
     public function destroy(Request $request, $id)
     {
 
-        $category = Category::find($id);
+        $category = Category::where('id',$id);
         if (!$category) {
             return response()->json(['message' => 'Category not found'], 404);
         }

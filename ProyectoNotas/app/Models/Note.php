@@ -10,6 +10,8 @@ class Note extends Model
     use HasFactory;
     protected $fillable = ['title', 'content', 'tipo', 'is_important', 'user_id', 'id_category'];
 
+    public $primaryKey  = 'id';
+
       // Define the relationship to Category
       public function category()
       {

@@ -57,14 +57,14 @@ class NoteController extends Controller
 
     public function show(Request $request, $id)
     {
-        $note = Note::find($id)->with('category')->first();
+        $note = Note::where('id',$id)->with('category')->first();
         $categories = Category::where('user_id', auth()->id())->get();
         return view('NotesForm', compact('note', 'categories'));
     }
 
     public function update(Request $request)
     {
-        $note = Note::find($request->id);
+        $note = Note::where('id',$request->id);
         if (!$note) {
             return response()->json(['message' => 'Note not found'], 404);
         }
@@ -93,7 +93,7 @@ class NoteController extends Controller
     public function destroy(Request $request, $id)
     {
 
-        $note = Note::find($id);
+        $note = Note::where('id',$id);
         if (!$note) {
             return response()->json(['message' => 'Note not found'], 404);
         }

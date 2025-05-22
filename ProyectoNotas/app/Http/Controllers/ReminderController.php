@@ -48,7 +48,10 @@ class ReminderController extends Controller
     }
     public function destroy($id)
     {
-        $reminder = Reminder::findOrFail($id);
+        $reminder = Reminder::where($id);
+        if(!$reminder){
+            return redirect()->route('reminders.upcoming');    
+        }
         $reminder->delete();
 
         return redirect()->route('reminders.upcoming')->with('success', 'Recordatorio eliminado correctamente.');
