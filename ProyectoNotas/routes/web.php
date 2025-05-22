@@ -28,7 +28,7 @@ Route::middleware('guest')->group(function () {
     })->name('login');
 
     Route::get('/register', function () {
-        return view('register');
+        return view('Register');
     })->name("register");
 
     Route::post('/login', [AuthController::class, 'login'])->name("login.post");
@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/formnotes', function () {
         $categories = Category::all();
-        return view('notesForm', compact('categories'));
+        return view('NotesForm', compact('categories'));
     })->name('notes.form');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name("logout");

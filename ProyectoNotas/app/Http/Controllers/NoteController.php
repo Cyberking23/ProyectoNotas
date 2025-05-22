@@ -21,7 +21,7 @@ class NoteController extends Controller
         $query->where('user_id', auth()->id());
         $notes = $query->get();
 
-        return view('notes', compact('notes', 'categories'));
+        return view('Notes', compact('notes', 'categories'));
     }
 
     public function importantNotes()
@@ -30,7 +30,7 @@ class NoteController extends Controller
         $notes = \App\Models\Note::query()
         ->where('user_id', auth()->id())
         ->where('is_important', '1')->with('category')->get();
-        return view('notes', compact('notes', 'categories'));
+        return view('Notes', compact('notes', 'categories'));
     }
 
 
@@ -59,7 +59,7 @@ class NoteController extends Controller
     {
         $note = Note::find($id)->with('category')->first();
         $categories = Category::all();
-        return view('notesform', compact('note', 'categories'));
+        return view('NotesForm', compact('note', 'categories'));
     }
 
     public function update(Request $request)
