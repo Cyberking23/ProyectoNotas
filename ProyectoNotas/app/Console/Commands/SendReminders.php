@@ -16,7 +16,7 @@ class SendReminders extends Command
     {
         $now = Carbon::now();
         $reminders = Reminder::where('sent', false)
-            ->where('remind_at', '<=', $now)
+            ->orWhere('remind_at', '<=', $now)
             ->get();
 
         foreach ($reminders as $reminder) {
