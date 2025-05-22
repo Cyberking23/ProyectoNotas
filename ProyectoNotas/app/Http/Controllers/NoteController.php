@@ -11,7 +11,7 @@ class NoteController extends Controller
 {
    public function index(Request $request)
     {
-        $categories = \App\Models\Category::all();
+        $categories = Category::where('user_id', auth()->id())->get();
         $query = \App\Models\Note::with('category');
 
         if ($request->filled('category_id')) {
@@ -26,7 +26,7 @@ class NoteController extends Controller
 
     public function importantNotes()
     {
-        $categories = \App\Models\Category::all();
+        $categories = Category::where('user_id', auth()->id())->get();
         $notes = \App\Models\Note::query()
         ->where('user_id', auth()->id())
         ->where('is_important', '1')->with('category')->get();
