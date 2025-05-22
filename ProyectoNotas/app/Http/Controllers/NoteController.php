@@ -58,7 +58,7 @@ class NoteController extends Controller
     public function show(Request $request, $id)
     {
         $note = Note::find($id)->with('category')->first();
-        $categories = Category::all();
+        $categories = Category::where('user_id', auth()->id())->get();
         return view('NotesForm', compact('note', 'categories'));
     }
 

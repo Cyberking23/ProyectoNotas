@@ -12,7 +12,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::where('user_id', auth()->id())->get();
         return view('categoria', compact('categories'));
     }
 
@@ -32,6 +32,9 @@ class CategoryController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:category,name',
         ]);
+
+        // Add the user_id to the validated data
+        $validated['user_id'] = auth()->id();
 
         // Create the category
         Category::create($validated);

@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get("/notes/importante", [NoteController::class, 'importantNotes'])->name('notes.importante');
 
     Route::get('/formnotes', function () {
-        $categories = Category::all();
+        $categories = Category::where('user_id', auth()->id())->get();
         return view('NotesForm', compact('categories'));
     })->name('notes.form');
 
